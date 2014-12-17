@@ -1,0 +1,19 @@
+{
+  "name": "contract-app",
+  "version": "0.0.0",
+  "authors": [
+    "MacLane Wilkison <mwilkison@gmail.com>",
+    "Michael Egorov <michwill@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.2"
+  }
+}
