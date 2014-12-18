@@ -1,63 +1,49 @@
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="stylesheet" href="css/palette.css">
+
 <polymer-element name="unsecured-loan-form">
 <template>
-  <form action="/contract/unsecured-loan" method="post" role="form">
-    <div class="form-group">
-      <label for="borrowerPubKey">Borrower Public Key (Hex)</label>
-      <input type="text" class="form-control" id="borrowerPubKey" name="borrowerPubKey" placeholder="Borrower Public Key (Hex)">
-    </div>
-    <div class="form-group">
-      <label for="lenderPubKey">Lender Public Key (Hex)</label>
-      <input type="text" class="form-control" id="lenderPubKey" name="lenderPubKey" placeholder="Lender Public Key (Hex)">
-    </div>
-    <div class="form-group">
-      <label for="currency">Currency</label>
-      <select class="form-control" id="currency" name="currency">
-        <option>USD</option>
-        <option>EUR</option>
-        <option>CNY</option>
-        <option>BTC</option>
-        <option>AUD</option>
-        <option>CHF</option>
-        <option>RUB</option>
-        <option>ZAR</option>
-        <option>IDR</option>
-        <option>MXN</option>
-        <option>BRL</option>
-        <option>ILS</option>
-        <option>GBP</option>
-        <option>NZD</option>
-        <option>PLN</option>
-        <option>RON</option>
-        <option>SEK</option>
-        <option>SGD</option>
-        <option>CAD</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="principal">Principal Amount</label>
-      <input type="number" class="form-control" id="principal" name="principal" placeholder="Principal Amount">
-    </div>
-    <div class="form-group">
-      <label for="interestRate">Interest Rate</label>
-      <div class="input-group">
-        <input type="number" class="form-control" id="interestRate" name="interestRate" placeholder="Interest Rate">
-        <span class="input-group-addon">%</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="maturity">Maturity Date</label>
-      <div class="input-group">
-        <input type="date" class="form-control" id="maturity" name="maturity">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="numPayments">Number of Payments</label>
-      <div class="input-group">
-        <input type="number" class="form-control" id="numPayments" name="numPayments" placeholder="Number of Payments">
-      </div>
-    </div>
-    <button id="submit-secured-loan" type="submit" class="btn btn-info">Submit</button>
-  </form>
+  <section>
+    <paper-input-decorator label="Borrower Public Key (Hex)" floatingLabel>
+      <input is="core-input">
+    </paper-input-decorator>
+    <br>
+    <paper-input-decorator label="Lender Public Key (Hex)" floatingLabel>
+      <input is="core-input">
+    </paper-input-decorator>
+    <br>
+    <h4>Currency</h4>
+    <paper-radio-group selected="BTC">
+      <paper-radio-button name="BTC" label="BTC"></paper-radio-button>
+      <paper-radio-button name="USD" label="USD"></paper-radio-button>
+      <paper-radio-button name="EUR" label="EUR"></paper-radio-button>
+      <paper-radio-button name="CNY" label="CNY"></paper-radio-button>
+    </paper-radio-group>
+    <br>
+    <paper-input-decorator label="Principal Amount" floatingLabel>
+      <input is="core-input" type="number">
+    </paper-input-decorator>
+    <br>
+    <paper-input-decorator label="Interest Rate (%)" floatingLabel>
+      <input is="core-input" type="number">
+    </paper-input-decorator>
+    <br>
+    <paper-input-decorator label="Maturity Date" floatingLabel labelVisible="false">
+      <input is="core-input" type="date">
+    </paper-input-decorator>
+    <br>
+    <paper-input-decorator label="Number of Payments" floatingLabel>
+      <input is="core-input" type="number">
+    </paper-input-decorator>
+    <br>
+    <paper-button class="accent-color">
+      <core-icon icon="check"></core-icon>
+      create
+    </paper-button>
+          
+  </section>
 </template>
 
 <script>

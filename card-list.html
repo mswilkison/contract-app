@@ -1,7 +1,7 @@
 <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="unsecured-loan-form.html">
 
-<polymer-element name="card-list">
+<polymer-element name="card-list" attributes="categoryType">
 <template>
 
 <style>
@@ -43,7 +43,7 @@
 }
 
 .card {
-  height: 400px;
+  width:100%;
   border-radius: 3px;
   text-align: start;
   overflow: hidden;
@@ -85,15 +85,19 @@
 
     <template repeat="{{items as item}}">
 
-    <div class="chip" hero-id="{{item.artist}}-{{item.contract}}" hero?="{{selectedContract === item }}">
-      <div class="chip-top" style="background:{{item.color}};" hero-id="{{item.artist}}-{{item.contract}}-art" hero?="{{selectedContract === item}}">
-        <core-icon class="contract-icon" icon="{{item.icon}}"></core-icon>
-      </div>
-      <div class="chip-bottom">
-        <div class="chip-title">{{item.contract}}</div>
-        <div class="chip-artist">{{item.artist}}</div>
-      </div>
-    </div>
+      <template if="{{item.type == categoryType}}">
+
+        <div class="chip" hero-id="{{item.type}}-{{item.contract}}" hero?="{{selectedContract === item }}">
+          <div class="chip-top" style="background:{{item.color}};" hero-id="{{item.type}}-{{item.contract}}-art" hero?="{{selectedContract === item}}">
+            <core-icon class="contract-icon" icon="{{item.icon}}"></core-icon>
+          </div>
+          <div class="chip-bottom">
+            <div class="chip-title">{{item.contract}}</div>
+            <div class="chip-type">{{item.type}}</div>
+          </div>
+        </div>
+
+      </template>
 
     </template>
 
@@ -102,8 +106,8 @@
 
 <section id="details">
 
-  <div class="card" layout horizontal hero-id="{{selectedContract.artist}}-{{selectedContract.contract}}" hero on-tap="{{transition}}">
-    <div class="card-zoom" hero-id="{{selectedContract.artist}}-{{selectedContract.contract}}-art" hero flex>
+  <div class="card" layout horizontal hero-id="{{selectedContract.type}}-{{selectedContract.contract}}" hero on-tap="{{transition}}">
+    <div class="card-zoom" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}-art" hero flex>
       <div layout horizontal center>
         <div>
           <div class="card-icon" style="background:{{selectedContract.color}};">
@@ -112,7 +116,7 @@
         </div>
         <div flex>
           <div class="card-title">{{selectedContract.contract}}</div>
-          <div class="card-artist">{{selectedContract.artist}}</div>
+          <div class="card-type">{{selectedContract.type}}</div>
         </div>
       </div>
       <unsecured-loan-form></unsecured-loan-form>
@@ -131,11 +135,14 @@ Polymer('card-list', {
 page: 0,
 
 items: [
-{ artist: 'Loan', contract: 'Unsecured', color: '#CFD8DC', icon: 'credit-card', form: 'unsecured-loan-form' },
-{ artist: 'Loan', contract: 'Secured', color: '#CFD8DC', icon: 'https'},
-{ artist: 'Loan', contract: 'Bond', color: '#CFD8DC', icon: 'receipt' },
-{ artist: 'Loan', contract: 'IR Swap', color: '#CFD8DC', icon: 'swap-horiz' },
-{ artist: 'Loan', contract: 'Custom', color: '#CFD8DC', icon: 'add' }
+{ type: 'Loans', contract: 'Unsecured', color: '#CFD8DC', icon: 'credit-card', form: 'unsecured-loan-form' },
+{ type: 'Loans', contract: 'Secured', color: '#CFD8DC', icon: 'https'},
+{ type: 'Loans', contract: 'Bond', color: '#CFD8DC', icon: 'receipt' },
+{ type: 'Loans', contract: 'IR Swap', color: '#CFD8DC', icon: 'swap-horiz' },
+{ type: 'Loans', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
+{ type: 'Payments', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
+{ type: 'Derivatives', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
+{ type: 'Insurance', contract: 'Custom', color: '#CFD8DC', icon: 'add' }
 ],
 
 selectedContract: null,
