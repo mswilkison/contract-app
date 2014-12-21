@@ -1,4 +1,5 @@
 <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="unsecured-loan-form.html">
 
 <polymer-element name="card-list" attributes="categoryType">
@@ -52,13 +53,6 @@
   padding: 24px;
 }
 
-.card-icon {
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  margin-right: 16px;
-}
-
 .card-title {
   font-size: 2em;
 }
@@ -71,6 +65,10 @@
   top: 25%;
   left: 25%;
   color: #727272;
+}
+
+.fab {
+  position: absolute;
 }
 </style>
 
@@ -114,9 +112,7 @@
     <div class="card-zoom" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}-art" hero flex>
       <div layout horizontal center>
         <div>
-          <div class="card-icon" style="background:{{selectedContract.color}};">
-            <core-icon class="contract-icon secondary-text-color" style="margin: auto; position:relative; top:25%; left:25%;" icon="arrow-back" on-tap="{{transition}}"></core-icon>
-          </div>
+            <paper-icon-button class="contract-icon secondary-text-color" style="margin: auto; position:relative; top:25%; left:25%;" icon="arrow-back" on-tap="{{transition}}"></paper-icon-button>
         </div>
         <div flex>
           <div class="card-title">{{selectedContract.contract}}</div>
@@ -124,6 +120,7 @@
         </div>
       </div>
       <unsecured-loan-form></unsecured-loan-form>
+      <paper-fab icon="arrow-forward"></paper-fab>
     </div>
   </div>
 
@@ -144,7 +141,7 @@ Polymer('card-list', {
   { type: 'Loans', contract: 'Bond', color: '#CFD8DC', icon: 'receipt' },
   { type: 'Loans', contract: 'IR Swap', color: '#CFD8DC', icon: 'swap-horiz' },
   { type: 'Loans', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
-  { type: 'Payments', contract: 'P2SH Multisignature', color: '#CFD8DC', icon: 'add' },
+  { type: 'Payments', contract: 'P2SH Multisignature', color: '#CFD8DC', icon: 'account-child' },
   { type: 'Payments', contract: 'Pay-to-Contract-Hash', color: '#CFD8DC', icon: 'add' },
   { type: 'Payments', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
   { type: 'Derivatives', contract: 'Custom', color: '#CFD8DC', icon: 'add' },

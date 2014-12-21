@@ -24,6 +24,7 @@
     "paper-item": "Polymer/paper-item#~0.5.2",
     "paper-menu-button": "Polymer/paper-menu-button#~0.5.2",
     "paper-input": "Polymer/paper-input#~0.5.2",
-    "core-scaffold": "Polymer/core-scaffold#~0.5.2"
+    "core-scaffold": "Polymer/core-scaffold#~0.5.2",
+    "paper-fab": "Polymer/paper-fab#~0.5.2"
   }
 }
