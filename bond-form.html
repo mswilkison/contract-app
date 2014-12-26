@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="css/palette.css">
 
-<polymer-element name="unsecured-loan-form">
+<polymer-element name="bond-form">
 <template>
 <style>
 paper-fab {
@@ -18,16 +18,13 @@ paper-fab {
 }
 </style>
   <core-animated-pages selected="{{step}}">
-    <counterparties-form></counterparties-form>
-    <currency-form></currency-form>
-    <loan-terms-form></loan-terms-form>
-    <pikaday-element></pikaday-element>
+    <p>Coming soon</p>
   </core-animated-pages>
   <paper-fab icon="arrow-forward" on-tap={{nextStep}}></paper-fab>
 </template>
 
 <script>
-Polymer('unsecured-loan-form', {
+Polymer('bond-form', {
   step: 0,
 
   nextStep: function(e) {

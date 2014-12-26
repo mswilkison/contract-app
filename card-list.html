@@ -4,6 +4,12 @@
 <link rel="import" href="counterparties-form.html">
 <link rel="import" href="currency-form.html">
 <link rel="import" href="loan-terms-form.html">
+<link rel="import" href="unsecured-loan-form.html">
+<link rel="import" href="secured-loan-form.html">
+<link rel="import" href="bond-form.html">
+<link rel="import" href="interest-rate-swap-form.html">
+<link rel="import" href="p2sh-multisignature-form.html">
+<link rel="import" href="pay-to-contract-hash-form.html">
 
 <polymer-element name="card-list" attributes="categoryType">
 <template>
@@ -79,12 +85,12 @@ paper-fab {
 
 <section>
 
-        <paper-tabs class="default-primary-color" selected="0" flex>
-          <paper-tab on-tap="{{tabSwitch}}" id="loans" class="text-primary-color">LOANS</paper-tab>
-          <paper-tab on-tap="{{tabSwitch}}" id="payments" class="text-primary-color">PAYMENTS</paper-tab>
-          <paper-tab on-tap="{{tabSwitch}}" id="derivatives" class="text-primary-color">DERIVATIVES</paper-tab>
-          <paper-tab on-tap="{{tabSwitch}}" id="insurance" class="text-primary-color">INSURANCE</paper-tab>
-        </paper-tabs>
+  <paper-tabs class="default-primary-color" selected="0" flex>
+    <paper-tab on-tap="{{tabSwitch}}" id="loans" class="text-primary-color">LOANS</paper-tab>
+    <paper-tab on-tap="{{tabSwitch}}" id="payments" class="text-primary-color">PAYMENTS</paper-tab>
+    <paper-tab on-tap="{{tabSwitch}}" id="derivatives" class="text-primary-color">DERIVATIVES</paper-tab>
+    <paper-tab on-tap="{{tabSwitch}}" id="insurance" class="text-primary-color">INSURANCE</paper-tab>
+  </paper-tabs>
 
   <div class="chip-container" hero-p on-tap="{{transition}}">
 
@@ -121,15 +127,24 @@ paper-fab {
           <div class="card-type">{{selectedContract.description}}</div>
         </div>
       </div>
-      <core-animated-pages selected="{{step}}">
-        <counterparties-form></counterparties-form>
-        <currency-form></currency-form>
-        <loan-terms-form></loan-terms-form>
-        <section>
-          <pikaday-element></pikaday-element>
-        </section>
-      </core-animated-pages>
-      <paper-fab icon="arrow-forward" on-tap={{nextStep}}></paper-fab>
+      <template if="{{selectedContract.contract == 'Unsecured Loan'}}">
+        <unsecured-loan-form></unsecured-loan-form>
+      </template>
+      <template if="{{selectedContract.contract == 'Secured Loan'}}">
+        <secured-loan-form></secured-loan-form>
+      </template>
+      <template if="{{selectedContract.contract == 'Bond'}}">
+        <bond-form></bond-form>
+      </template>
+      <template if="{{selectedContract.contract == 'Interest Rate Swap'}}">
+        <interest-rate-swap-form></interest-rate-swap-form>
+      </template>
+      <template if="{{selectedContract.contract == 'P2SH Multisignature'}}">
+        <p2sh-multisignature-form></p2sh-multisignature-form>
+      </template>
+      <template if="{{selectedContract.contract == 'Pay-to-Contract-Hash'}}">
+        <pay-to-contract-hash-form></pay-to-contract-hash-form>
+      </template>
     </div>
   </div>
 

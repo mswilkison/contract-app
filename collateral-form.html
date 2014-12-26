@@ -1,0 +1,20 @@
+<link rel="import" href="bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="stylesheet" href="css/palette.css">
+
+<polymer-element name="collateral-form">
+<template>
+    <h4>Collateral Type</h4>
+    <paper-radio-group selected="BTC">
+      <paper-radio-button name="BTC" label="BTC"></paper-radio-button>
+      <paper-radio-button name="SP" label="Smart Property"></paper-radio-button>
+    </paper-radio-group>
+    <h4>Required Coverage (%)</h4>
+    <paper-slider min="0" max="300" editable></paper-slider>
+</template>
+
+<script>
+Polymer('collateral-form', {});
+</script>
+</polymer-element>
