@@ -53,48 +53,25 @@
 
 <body unresolved>
   <core-header-panel>
-    <core-toolbar class="default-primary-color">
-
-      <div horizontal layout>
-      </div>
-    </core-toolbar>
-
+    <core-toolbar class="default-primary-color"></core-toolbar>
   </core-header-panel>
-    <core-scaffold>
-      <core-header-panel navigation flex mode="seamed" class="light-primary-color">
-        <core-toolbar id="logo">Contractual</core-toolbar>
-        <core-menu>
-          <core-item icon="account-circle" label="My Account"></core-item>
-          <core-item icon="description" label="My Contracts"></core-item>
-        </core-menu>
-      </core-header-panel>
-      <div flex tool>Contracts</div>
-      <paper-icon-button tool icon="search"></paper-icon-button>
+  <core-scaffold>
+    <core-header-panel navigation flex mode="seamed" class="light-primary-color">
+      <core-toolbar id="logo">Contractual</core-toolbar>
+      <core-menu>
+        <core-item icon="account-circle" label="My Account"></core-item>
+        <core-item icon="description" label="My Contracts"></core-item>
+        <core-item icon="settings" label="Settings"></core-item>
+        <core-item icon="help" label="Help & feedback"></core-item>
+      </core-menu>
+    </core-header-panel>
+    <div flex tool>Contracts</div>
+    <paper-icon-button tool icon="search"></paper-icon-button>
+    <core-animated-pages transitions="cross-fade">
+      <div cross-fade>
+        <card-list categoryType="l"></card-list>
       </div>
-      <div>
-        <core-animated-pages transitions="cross-fade">
-          <div id="loans">
-            <div cross-fade>
-              <card-list categoryType="Loans"></card-list>
-            </div>
-          </div>
-          <div id="payments">
-            <div cross-fade>
-              <card-list categoryType="Payments"></card-list>
-            </div>
-          </div>
-          <div id="derivatives">
-            <div cross-fade>
-              <card-list categoryType="Derivatives"></card-list>
-            </div>
-          </div>
-          <div id="insurance">
-            <div cross-fade>
-              <card-list categoryType="Insurance"></card-list>
-            </div>
-          </div>
-        </core-animated-pages>
-      </div>
-    </core-scaffold>
+    </core-animated-pages>
+  </core-scaffold>
   <script src="js/index.js"></script>
 </body>

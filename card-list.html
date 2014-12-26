@@ -1,6 +1,9 @@
 <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="unsecured-loan-form.html">
+<link rel="import" href="pikaday-element.html">
+<link rel="import" href="counterparties-form.html">
+<link rel="import" href="currency-form.html">
+<link rel="import" href="loan-terms-form.html">
 
 <polymer-element name="card-list" attributes="categoryType">
 <template>
@@ -42,11 +45,10 @@
 
 .card {
   width:100%;
-  border-radius: 3px;
+  height:500px;
   text-align: start;
-  overflow: hidden;
+  overflow: auto;
   background: #fff;
-  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-zoom {
@@ -67,9 +69,10 @@
   color: #727272;
 }
 
-.fab {
-  position: absolute;
+paper-fab {
+  float: right;
 }
+
 </style>
 
 <core-animated-pages selected="{{page}}" transitions="hero-transition slide-up slide-down cross-fade list-cascade" on-core-animated-pages-transition-end="{{complete}}">
@@ -95,7 +98,6 @@
           </div>
           <div class="chip-bottom">
             <div class="chip-title">{{item.contract}}</div>
-            <div class="chip-type">{{item.type}}</div>
           </div>
         </div>
 
@@ -108,19 +110,26 @@
 
 <section id="details">
 
-  <div class="card" layout horizontal hero-id="{{selectedContract.type}}-{{selectedContract.contract}}" hero flex layout horizontal center>
-    <div class="card-zoom" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}-art" hero flex>
+  <div class="card" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}" hero flex layout center>
+    <div class="card-zoom" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}-art" hero>
       <div layout horizontal center>
         <div>
-            <paper-icon-button class="contract-icon secondary-text-color" style="margin: auto; position:relative; top:25%; left:25%;" icon="arrow-back" on-tap="{{transition}}"></paper-icon-button>
+          <paper-icon-button class="contract-icon secondary-text-color" style="margin: auto; position:relative; top:25%; left:25%;" icon="arrow-back" on-tap="{{transition}}"></paper-icon-button>
         </div>
         <div flex>
           <div class="card-title">{{selectedContract.contract}}</div>
-          <div class="card-type">{{selectedContract.type}}</div>
+          <div class="card-type">{{selectedContract.description}}</div>
         </div>
       </div>
-      <unsecured-loan-form></unsecured-loan-form>
-      <paper-fab icon="arrow-forward"></paper-fab>
+      <core-animated-pages selected="{{step}}">
+        <counterparties-form></counterparties-form>
+        <currency-form></currency-form>
+        <loan-terms-form></loan-terms-form>
+        <section>
+          <pikaday-element></pikaday-element>
+        </section>
+      </core-animated-pages>
+      <paper-fab icon="arrow-forward" on-tap={{nextStep}}></paper-fab>
     </div>
   </div>
 
@@ -135,17 +144,19 @@ Polymer('card-list', {
 
   page: 0,
 
+  step: 0,
+
   items: [
-  { type: 'Loans', contract: 'Unsecured', color: '#CFD8DC', icon: 'credit-card', form: 'unsecured-loan-form' },
-  { type: 'Loans', contract: 'Secured', color: '#CFD8DC', icon: 'https'},
-  { type: 'Loans', contract: 'Bond', color: '#CFD8DC', icon: 'receipt' },
-  { type: 'Loans', contract: 'IR Swap', color: '#CFD8DC', icon: 'swap-horiz' },
-  { type: 'Loans', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
-  { type: 'Payments', contract: 'P2SH Multisignature', color: '#CFD8DC', icon: 'account-child' },
-  { type: 'Payments', contract: 'Pay-to-Contract-Hash', color: '#CFD8DC', icon: 'add' },
-  { type: 'Payments', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
-  { type: 'Derivatives', contract: 'Custom', color: '#CFD8DC', icon: 'add' },
-  { type: 'Insurance', contract: 'Custom', color: '#CFD8DC', icon: 'add' }
+  { type: 'l', contract: 'Unsecured Loan', color: '#CFD8DC', icon: 'credit-card', steps: 4, description: 'This contract is issued and supported only by the borrower\'s creditworthiness, rather than by any collateral.', form: 'unsecured-loan-form' },
+  { type: 'l', contract: 'Secured Loan', color: '#CFD8DC', icon: 'https', description: 'This contract is secured by collateral to reduce the risk associated with lending.', },
+  { type: 'l', contract: 'Bond', color: '#CFD8DC', icon: 'receipt', description: '', },
+  { type: 'l', contract: 'Interest Rate Swap', color: '#CFD8DC', icon: 'swap-horiz', description: 'This contract exchanges one stream of future interest payments for another based on a specified principal amount.' },
+  { type: 'l', contract: 'Custom', color: '#CFD8DC', icon: 'add', description: '' },
+  { type: 'p', contract: 'P2SH Multisignature', color: '#CFD8DC', icon: 'account-child', description: 'This contract requires multiple signatures to spend an UTXO.' },
+  { type: 'p', contract: 'Pay-to-Contract-Hash', color: '#CFD8DC', icon: 'add', description: '' },
+  { type: 'p', contract: 'Custom', color: '#CFD8DC', icon: 'add', description: '' },
+  { type: 'd', contract: 'Custom', color: '#CFD8DC', icon: 'add', description: '' },
+  { type: 'i', contract: 'Custom', color: '#CFD8DC', icon: 'add', description: '' }
   ],
 
   selectedContract: null,
@@ -153,16 +164,16 @@ Polymer('card-list', {
   tabSwitch: function(e, index) {
     switch (e.srcElement.id) {
       case 'loans':
-        this.categoryType = 'Loans';
+        this.categoryType = 'l';
         break;
       case 'payments':
-        this.categoryType = 'Payments';
+        this.categoryType = 'p';
         break;
       case 'derivatives':
-        this.categoryType = 'Derivatives';
+        this.categoryType = 'd';
         break;
       case 'insurance':
-        this.categoryType = 'Insurance';
+        this.categoryType = 'i';
         break;
     }
   },
@@ -174,6 +185,10 @@ Polymer('card-list', {
     } else {
       this.page = 0;
     }
+  },
+
+  nextStep: function(e) {
+    this.step = (this.step + 1) % this.selectedContract.steps;
   }
 });
 
