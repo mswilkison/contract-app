@@ -28,31 +28,6 @@
     this.route = this.route || DEFAULT_ROUTE; // Select initial route.
   });
 
-  template.keyHandler = function(e, detail, sender) {
-    var pages = document.querySelector('#pages');
-
-    // Select page by num key. 
-    var num = parseInt(detail.key);
-    if (!isNaN(num) && num <= this.pages.length) {
-      pages.selectIndex(num - 1);
-      return;
-    }
-
-    switch (detail.key) {
-      case 'left':
-      case 'up':
-        pages.selectPrevious();
-        break;
-      case 'right':
-      case 'down':
-        pages.selectNext();
-        break;
-      case 'space':
-        detail.shift ? pages.selectPrevious() : pages.selectNext();
-        break;
-    }
-  };
-
   template.cyclePages = function(e, detail, sender) {
     // Click clicks should navigate and not cycle pages.
     if (e.path[0].localName == 'a') {
