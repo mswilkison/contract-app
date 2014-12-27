@@ -40,6 +40,9 @@
       width: 80%;
       margin: 50px auto;
     }
+    paper-item a {
+      text-decoration: none;
+    }
     @media (min-width: 481px) {
       #tabs {
         width: 200px;
@@ -51,27 +54,56 @@
   </style>
 </head>
 
-<body unresolved>
-  <core-header-panel>
-    <core-toolbar class="default-primary-color"></core-toolbar>
-  </core-header-panel>
-  <core-scaffold>
+<body unresolved fullbleed>
+  <template is="auto-binding" id="t">
+
+  <!-- Route controller. -->
+  <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
+  <!-- Keyboard nav controller. -->
+  <core-a11y-keys id="keys" target="{{parentElement}}"
+                  keys="up down left right space space+shift"
+                  on-keys-pressed="{{keyHandler}}"></core-a11y-keys>
+
+  <core-scaffold id="scaffold">
+
     <core-header-panel navigation flex mode="seamed" class="light-primary-color">
       <core-toolbar id="logo">Contractual</core-toolbar>
-      <core-menu>
-        <core-item icon="account-circle" label="My Account"></core-item>
-        <core-item icon="description" label="My Contracts"></core-item>
-        <core-item icon="settings" label="Settings"></core-item>
-        <core-item icon="help" label="Help & feedback"></core-item>
+      <core-menu valueattr="hash" selected="{{route}}" selectedModel="{{selectedPage}}"
+                 on-core-select="{{menuItemSelected}}">
+        <template repeat="{{page, i in pages}}">
+          <paper-item hash="{{page.hash}}" noink>
+            <core-icon icon="{{page.icon}}"></core-icon>
+            <a class="primary-text-color" href="#{{page.hash}}">&nbsp;{{page.name}}</a>
+          </paper-item>
+        </template>
       </core-menu>
     </core-header-panel>
-    <div flex tool>Contracts</div>
+
+    <div flex tool>{{selectedPage.page.name}}</div>
     <paper-icon-button tool icon="search"></paper-icon-button>
-    <core-animated-pages transitions="cross-fade">
-      <div cross-fade>
-        <card-list categoryType="l"></card-list>
-      </div>
-    </core-animated-pages>
+
+      <core-animated-pages id="pages" selected="{{route}}" valueattr="hash"
+                           transitions="slide-from-right">
+        <section hash="one">
+          <card-list categoryType="l"></card-list>
+        </section>
+        <section hash="two">
+          <div>My account</div>
+        </section>
+        <section hash="three">
+          <div>My contracts</div>
+        </section>
+        <section hash="four">
+          <div>Settings</div>
+        </section>
+        <section hash="five">
+          <div>Help & feedback</div>
+        </section>
+      </core-animated-pages>
+
   </core-scaffold>
-  <script src="js/index.js"></script>
+
+</template>
+<script src="js/index.js"></script>
 </body>

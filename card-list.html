@@ -81,7 +81,7 @@ paper-fab {
 
 </style>
 
-<core-animated-pages selected="{{page}}" transitions="hero-transition slide-up slide-down cross-fade list-cascade" on-core-animated-pages-transition-end="{{complete}}">
+<core-animated-pages selected="{{tab}}" transitions="hero-transition slide-up slide-down cross-fade list-cascade" on-core-animated-pages-transition-end="{{complete}}">
 
 <section>
 
@@ -157,7 +157,7 @@ paper-fab {
 
 Polymer('card-list', {
 
-  page: 0,
+  tab: 0,
 
   step: 0,
 
@@ -176,7 +176,7 @@ Polymer('card-list', {
 
   selectedContract: null,
 
-  tabSwitch: function(e, index) {
+  tabSwitch: function(e) {
     switch (e.srcElement.id) {
       case 'loans':
         this.categoryType = 'l';
@@ -194,11 +194,11 @@ Polymer('card-list', {
   },
 
   transition: function(e) {
-    if (this.page === 0 && e.target.templateInstance.model.item) {
+    if (this.tab === 0 && e.target.templateInstance.model.item) {
       this.selectedContract = e.target.templateInstance.model.item;
-      this.page = 1;
+      this.tab = 1;
     } else {
-      this.page = 0;
+      this.tab = 0;
     }
   },
 
