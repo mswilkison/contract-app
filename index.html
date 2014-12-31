@@ -13,20 +13,20 @@
   <link rel="stylesheet" href="css/palette.css">
 
   <!-- <link rel="import" href="bower_components/font-roboto/roboto.html"> -->
-  <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-  <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
-  <link rel="import" href="bower_components/core-item/core-item.html">
-  <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
-  <link rel="import" href="bower_components/core-menu/core-menu.html">
-  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="bower_components/paper-item/paper-item.html">
-  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
-  <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
-  <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
+  <!-- <link rel="import" href="bower_components/core-toolbar/core-toolbar.html"> -->
+  <!-- <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html"> -->
+  <!-- <link rel="import" href="bower_components/core-scaffold/core-scaffold.html"> -->
+  <!-- <link rel="import" href="bower_components/core-item/core-item.html"> -->
+  <!-- <link rel="import" href="bower_components/core-header-panel/core-header-panel.html"> -->
+  <!-- <link rel="import" href="bower_components/core-menu/core-menu.html"> -->
+  <!-- <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html"> -->
+  <!-- <link rel="import" href="bower_components/paper-item/paper-item.html"> -->
+  <!-- <link rel="import" href="bower_components/paper-tabs/paper-tabs.html"> -->
+  <!-- <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html"> -->
+  <!-- <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html"> -->
 
   <!-- custom imports -->
-  <link rel="import" href="card-list.html">
+  <link rel="import" href="elements.html">
 
   <style>
     html,body {
@@ -54,7 +54,7 @@
   </style>
 </head>
 
-<body unresolved fullbleed>
+<body unresolved fullbleed layout vertical>
   <template is="auto-binding" id="t">
 
   <!-- Route controller. -->
@@ -98,7 +98,7 @@
           <div>Settings</div>
         </section>
         <section hash="five">
-          <div>Help & feedback</div>
+          <help-feedback-form></help-feedback-form>
         </section>
       </core-animated-pages>
 

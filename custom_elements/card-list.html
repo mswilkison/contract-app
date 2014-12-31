@@ -1,5 +1,5 @@
-<link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="pikaday-element.html">
 <link rel="import" href="counterparties-form.html">
 <link rel="import" href="currency-form.html">
@@ -13,7 +13,7 @@
 
 <polymer-element name="card-list" attributes="categoryType">
 <template>
-<link rel="stylesheet" href="css/palette.css">
+<link rel="stylesheet" href="../css/palette.css">
 
 <style>
 .chip-container {
@@ -85,11 +85,12 @@ paper-fab {
 
 <section>
 
-  <paper-tabs class="default-primary-color" selected="0" flex>
+  <paper-tabs class="default-primary-color" selected="0" scrollable>
     <paper-tab on-tap="{{tabSwitch}}" id="loans" class="text-primary-color">LOANS</paper-tab>
     <paper-tab on-tap="{{tabSwitch}}" id="payments" class="text-primary-color">PAYMENTS</paper-tab>
     <paper-tab on-tap="{{tabSwitch}}" id="derivatives" class="text-primary-color">DERIVATIVES</paper-tab>
     <paper-tab on-tap="{{tabSwitch}}" id="insurance" class="text-primary-color">INSURANCE</paper-tab>
+    <paper-tab on-tap="{{tabSwitch}}" id="insurance" class="text-primary-color">PRIVATE EQUITY</paper-tab>
   </paper-tabs>
 
   <div class="chip-container" hero-p on-tap="{{transition}}">
@@ -119,11 +120,11 @@ paper-fab {
   <div class="card" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}" hero flex layout center>
     <div class="card-zoom" hero-id="{{selectedContract.type}}-{{selectedContract.contract}}-art" hero>
       <div layout horizontal center>
-        <div>
-          <paper-icon-button class="contract-icon secondary-text-color" style="margin: auto; position:relative; top:25%; left:25%;" icon="arrow-back" on-tap="{{transition}}"></paper-icon-button>
-        </div>
         <div flex>
-          <div class="card-title">{{selectedContract.contract}}</div>
+          <core-toolbar>
+            <paper-icon-button class="secondary-text-color" icon="arrow-back" on-tap="{{transition}}"></paper-icon-button>
+            <div class="card-title">{{selectedContract.contract}}</div>
+          </core-toolbar>
           <div class="card-type">{{selectedContract.description}}</div>
         </div>
       </div>
