@@ -1,5 +1,11 @@
 bower_components/
 *.swp
 *.swo
+*.pyc
 .hgignore
 .hg/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
